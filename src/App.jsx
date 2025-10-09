@@ -17,6 +17,15 @@ import DiceRoller from './components/DiceRoller'
 import CoinToss from './components/CoinToss'
 import TriviaQuiz from './components/TriviaQuiz'
 import UnitConverter from './components/UnitConverter'
+import ImageCarousel from './components/ImageCarousel' // 👈 New import
+import ContactList from './components/ContactList'
+import NotesApp from './components/NotesApp';
+import MemoryGame from './components/MemoryGame'
+import TicTacToe from './components/TicTacToe'
+import SaranWrapGame from './components/SaranWrapGame'
+import MazeGame from './components/MazeGame';
+
+
 
 function App() {
   const [darkMode, setDarkMode] = useState(false)
@@ -65,6 +74,15 @@ function App() {
             <Route path="/coin-toss" element={<CoinToss />} />
             <Route path="/trivia-quiz" element={<TriviaQuiz />} />
             <Route path="/unit-converter" element={<UnitConverter />} />
+            <Route path="/image-carousel" element={<ImageCarousel />} /> {/* 👈 New Route */}
+            <Route path="/contact-list" element={<ContactList />} />
+            <Route path="/notes" element={<NotesApp />} />
+            <Route path="/memory-game" element={<MemoryGame />} />
+            <Route path="/tic-tac-toe" element={<TicTacToe />} />
+            <Route path="/saran-wrap-game" element={<SaranWrapGame />} />
+            <Route path="/maze-game" element={<MazeGame />} />
+            
+            
           </Routes>
         </Router>
       </div>
