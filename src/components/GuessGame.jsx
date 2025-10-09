@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 function GuessGame() {
   const [gameState, setGameState] = useState('menu') // 'menu', 'playing', 'won', 'lost'
@@ -74,22 +74,22 @@ function GuessGame() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <div className="bg-white rounded-xl shadow-lg p-8">
+    <div className="max-w-lg sm:max-w-2xl mx-auto p-4 sm:p-6">
+      <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8">
         {gameState === 'menu' && (
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6">
               🎮 Guess the Number Game
             </h2>
-            <p className="text-gray-600 mb-8">
+            <p className="text-gray-600 mb-6 sm:mb-8">
               I'm thinking of a number. Can you guess what it is?
             </p>
 
-            <div className="mb-8">
-              <h3 className="text-xl font-semibold text-gray-700 mb-4">
+            <div className="mb-6 sm:mb-8">
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-700 mb-3 sm:mb-4">
                 Choose Difficulty:
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                 {Object.entries(difficulties).map(([key, diff]) => (
                   <button
                     key={key}
@@ -97,7 +97,7 @@ function GuessGame() {
                       setDifficulty(key)
                       startNewGame(key)
                     }}
-                    className={`p-4 rounded-lg border-2 transition-all duration-200 ${
+                    className={`p-3 sm:p-4 rounded-lg border-2 transition-all duration-200 ${
                       difficulty === key
                         ? 'border-blue-500 bg-blue-50 text-blue-700'
                         : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
@@ -114,7 +114,7 @@ function GuessGame() {
 
             <button
               onClick={() => startNewGame()}
-              className="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors duration-200"
+              className="bg-green-600 text-white px-6 sm:px-8 py-3 rounded-lg font-semibold text-base sm:text-lg hover:bg-green-700 transition-colors duration-200"
             >
               Start Game
             </button>
@@ -124,7 +124,7 @@ function GuessGame() {
         {gameState === 'playing' && (
           <div>
             <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
                 Guess the Number
               </h2>
               <p className="text-gray-600">
@@ -138,20 +138,21 @@ function GuessGame() {
               </div>
             </div>
 
+            {/* Input + Button Responsive */}
             <div className="mb-6">
-              <div className="flex">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <input
                   type="number"
                   value={guess}
                   onChange={(e) => setGuess(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="Enter your guess..."
-                  className="flex-1 px-6 py-4 border-2 border-gray-400 rounded-l-lg focus:outline-none focus:ring-4 focus:ring-blue-500 focus:border-blue-500 text-xl font-semibold bg-white shadow-lg"
+                  className="w-full px-4 py-3 border-2 border-gray-400 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-500 focus:border-blue-500 text-lg font-semibold bg-white shadow-md"
                   min="1"
                 />
                 <button
                   onClick={makeGuess}
-                  className="px-6 py-3 bg-blue-600 text-white rounded-r-lg hover:bg-blue-700 transition-colors duration-200 font-semibold"
+                  className="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-semibold"
                 >
                   Guess
                 </button>
@@ -166,10 +167,14 @@ function GuessGame() {
                   {hints.map((hint, index) => (
                     <div
                       key={index}
-                      className="p-4 bg-white border-2 border-gray-200 rounded-lg flex justify-between items-center shadow-md hover:shadow-lg transition-shadow duration-200"
+                      className="p-3 sm:p-4 bg-white border-2 border-gray-200 rounded-lg flex flex-col sm:flex-row sm:justify-between sm:items-center shadow-md hover:shadow-lg transition-shadow duration-200"
                     >
-                      <span className="font-mono text-2xl font-bold text-blue-600">#{hint.guess}</span>
-                      <span className="text-lg text-gray-800 font-semibold">{hint.hint}</span>
+                      <span className="font-mono text-lg sm:text-2xl font-bold text-blue-600">
+                        #{hint.guess}
+                      </span>
+                      <span className="text-base sm:text-lg text-gray-800 font-semibold">
+                        {hint.hint}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -178,7 +183,7 @@ function GuessGame() {
 
             <button
               onClick={resetGame}
-              className="w-full bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-600 transition-colors duration-200"
+              className="w-full bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600 transition-colors duration-200"
             >
               New Game
             </button>
@@ -187,29 +192,29 @@ function GuessGame() {
 
         {(gameState === 'won' || gameState === 'lost') && (
           <div className="text-center">
-            <div className="text-6xl mb-4">
+            <div className="text-5xl sm:text-6xl mb-4">
               {gameState === 'won' ? '🎉' : '💀'}
             </div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
               {gameState === 'won' ? 'Congratulations!' : 'Game Over!'}
             </h2>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 mb-6 text-base sm:text-lg">
               {gameState === 'won' 
                 ? `You guessed the number ${secretNumber} in ${attempts} attempts!`
                 : `The secret number was ${secretNumber}. Better luck next time!`
               }
             </p>
             
-            <div className="space-x-4">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <button
                 onClick={() => startNewGame()}
-                className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors duration-200"
+                className="w-full sm:w-auto bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors duration-200"
               >
                 Play Again
               </button>
               <button
                 onClick={resetGame}
-                className="bg-gray-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-600 transition-colors duration-200"
+                className="w-full sm:w-auto bg-gray-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-600 transition-colors duration-200"
               >
                 Change Difficulty
               </button>
